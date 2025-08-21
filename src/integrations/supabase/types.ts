@@ -68,6 +68,132 @@ export type Database = {
           },
         ]
       }
+      billing_customers: {
+        Row: {
+          created_at: string | null
+          customer_id: string
+          id: string
+          organization_id: string
+          provider: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          customer_id: string
+          id?: string
+          organization_id: string
+          provider?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          customer_id?: string
+          id?: string
+          organization_id?: string
+          provider?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "billing_customers_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      billing_invoices: {
+        Row: {
+          amount: number
+          created_at: string | null
+          currency: string | null
+          id: string
+          invoice_id: string
+          organization_id: string
+          paid: boolean | null
+          provider: string | null
+          updated_at: string | null
+          url: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          currency?: string | null
+          id?: string
+          invoice_id: string
+          organization_id: string
+          paid?: boolean | null
+          provider?: string | null
+          updated_at?: string | null
+          url?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          currency?: string | null
+          id?: string
+          invoice_id?: string
+          organization_id?: string
+          paid?: boolean | null
+          provider?: string | null
+          updated_at?: string | null
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "billing_invoices_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      billing_subscriptions: {
+        Row: {
+          created_at: string | null
+          current_period_end: string | null
+          id: string
+          organization_id: string
+          plan: string | null
+          provider: string | null
+          status: string | null
+          subscription_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          current_period_end?: string | null
+          id?: string
+          organization_id: string
+          plan?: string | null
+          provider?: string | null
+          status?: string | null
+          subscription_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          current_period_end?: string | null
+          id?: string
+          organization_id?: string
+          plan?: string | null
+          provider?: string | null
+          status?: string | null
+          subscription_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "billing_subscriptions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       inspection_items: {
         Row: {
           created_at: string | null
@@ -125,6 +251,7 @@ export type Database = {
           id: string
           number: string
           organization_id: string
+          parent_inspection_id: string | null
           signed_at: string | null
           status: string | null
           template_id: string
@@ -140,6 +267,7 @@ export type Database = {
           id?: string
           number: string
           organization_id: string
+          parent_inspection_id?: string | null
           signed_at?: string | null
           status?: string | null
           template_id: string
@@ -155,6 +283,7 @@ export type Database = {
           id?: string
           number?: string
           organization_id?: string
+          parent_inspection_id?: string | null
           signed_at?: string | null
           status?: string | null
           template_id?: string
@@ -174,6 +303,13 @@ export type Database = {
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inspections_parent_inspection_id_fkey"
+            columns: ["parent_inspection_id"]
+            isOneToOne: false
+            referencedRelation: "inspections"
             referencedColumns: ["id"]
           },
           {
@@ -513,6 +649,44 @@ export type Database = {
           },
           {
             foreignKeyName: "templates_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      usage_counters: {
+        Row: {
+          created_at: string | null
+          id: string
+          month: string
+          organization_id: string
+          pdf_count: number | null
+          public_links_count: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          month: string
+          organization_id: string
+          pdf_count?: number | null
+          public_links_count?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          month?: string
+          organization_id?: string
+          pdf_count?: number | null
+          public_links_count?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "usage_counters_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
