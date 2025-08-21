@@ -216,7 +216,7 @@ export function SignatureModal({
               <Checkbox
                 id="consent-geo"
                 checked={consentGeo}
-                onCheckedChange={setConsentGeo}
+                onCheckedChange={(checked) => setConsentGeo(checked === true)}
               />
               <Label htmlFor="consent-geo" className="text-sm leading-relaxed">
                 Autorizo a captura da minha localização para fins de auditoria (opcional)
@@ -227,7 +227,7 @@ export function SignatureModal({
               <Checkbox
                 id="consent-lgpd"
                 checked={consentLGPD}
-                onCheckedChange={setConsentLGPD}
+                onCheckedChange={(checked) => setConsentLGPD(checked === true)}
                 required
               />
               <Label htmlFor="consent-lgpd" className="text-sm leading-relaxed">
