@@ -32,6 +32,21 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- POLÍTICAS PARA ORGANIZATIONS
+-- billing_customers
+DROP POLICY IF EXISTS "Users can view their org billing customers"
+ON public.billing_customers;
+
+CREATE POLICY "Users can view their org billing customers"
+ON public.billing_customers
+FOR SELECT
+USING (
+  exists (
+    select 1 from public.profiles p
+    where p.user_id = auth.uid()
+      and p.organization_id = billing_customers.organization_id
+  )
+);
+
 CREATE POLICY "Users can view their organizations" ON public.organizations
   FOR SELECT USING (
     id IN (
