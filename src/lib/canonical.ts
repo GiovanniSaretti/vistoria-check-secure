@@ -43,7 +43,6 @@ export function generateInspectionCanonicalData(inspection: any): any {
     template_id: inspection.template_id,
     organization_id: inspection.organization_id,
     context_json: inspection.context_json,
-    data_json: inspection.data_json,
     status: inspection.status,
     created_at: inspection.created_at,
     signed_at: inspection.signed_at,
