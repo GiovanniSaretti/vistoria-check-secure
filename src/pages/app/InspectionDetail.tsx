@@ -70,7 +70,7 @@ export default function InspectionDetail() {
                 {inspection.title || inspection.template?.name}
               </h1>
               <p className="text-muted-foreground">
-                {inspection.number} • {inspection.context_json?.client || 'Cliente não informado'}
+                {inspection.number} • {(inspection.context_json as any)?.client || 'Cliente não informado'}
               </p>
             </div>
             

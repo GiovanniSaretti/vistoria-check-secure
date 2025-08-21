@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/integrations/supabase/client'
 import { toast } from '@/components/ui/sonner'
 import { 
   CheckCircle, 
@@ -41,7 +41,7 @@ export function InspectionForm({ inspectionId }: InspectionFormProps) {
   // Load existing data
   useEffect(() => {
     if (inspection?.data_json) {
-      setItemValues(inspection.data_json)
+      setItemValues(inspection.data_json as Record<string, any>)
     }
     if (inspection?.inspection_items) {
       const notes: Record<string, string> = {}
@@ -155,7 +155,7 @@ export function InspectionForm({ inspectionId }: InspectionFormProps) {
     )
   }
 
-  const sections = template.schema_json?.sections || []
+  const sections = (template.schema_json as any)?.sections || []
   const currentSection = sections[selectedSection]
   const completedItems = Object.keys(itemValues).length
   const totalItems = sections.reduce((total: number, section: any) => 
@@ -172,7 +172,7 @@ export function InspectionForm({ inspectionId }: InspectionFormProps) {
               {inspection.title || template.name}
             </CardTitle>
             <CardDescription>
-              {inspection.number} • {inspection.context_json?.client || 'Cliente não informado'}
+              {inspection.number} • {(inspection.context_json as any)?.client || 'Cliente não informado'}
             </CardDescription>
           </div>
           <div className="flex items-center gap-3">

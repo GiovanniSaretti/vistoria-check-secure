@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/integrations/supabase/client'
 import { canonicalJSONString } from '@/lib/canonical'
 import { verifyInspectionIntegrity } from '@/lib/hash-browser'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
