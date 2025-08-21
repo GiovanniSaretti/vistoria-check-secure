@@ -1,4 +1,4 @@
-import { supabase } from './supabase'
+import { supabase } from '@/integrations/supabase/client'
 import type { User, Session } from '@supabase/supabase-js'
 
 export interface AuthUser extends User {
@@ -58,8 +58,38 @@ export async function signUp(email: string, password: string, organizationName: 
 
   if (profileError) throw profileError
 
-  // Create seed templates
-  await supabase.rpc('create_seed_templates_for_org', { org_id: orgData.id })
+  // Create basic inspection template
+  const { error: templateError } = await supabase
+    .from('templates')
+    .insert({
+      organization_id: orgData.id,
+      name: 'Inspeção Básica',
+      description: 'Template básico para inspeções',
+      schema_json: {
+        sections: [
+          {
+            title: 'Informações Gerais',
+            fields: [
+              {
+                id: 'location',
+                type: 'text',
+                label: 'Local da Inspeção',
+                required: true
+              },
+              {
+                id: 'inspector_name',
+                type: 'text', 
+                label: 'Nome do Inspetor',
+                required: true
+              }
+            ]
+          }
+        ]
+      },
+      created_by: authData.user.id
+    })
+
+  if (templateError) throw templateError
 
   return { user: authData.user, organization: orgData }
 }
