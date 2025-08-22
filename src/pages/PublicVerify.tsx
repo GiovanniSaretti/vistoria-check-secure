@@ -1,12 +1,9 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-
 type VerifyResp = { status:'verified'|'tampered'|'expired'|'error', signedUrl?:string }
-
 export default function PublicVerify(){
   const { token } = useParams()
   const [state,setState]=useState<VerifyResp>({ status:'error' })
-
   useEffect(()=>{
     (async ()=>{
       try{
@@ -16,7 +13,6 @@ export default function PublicVerify(){
       }catch{ setState({ status:'error' }) }
     })()
   },[token])
-
   return (
     <div className="mx-auto max-w-xl p-6">
       <h1 className="text-xl font-semibold mb-4">Verificação do Relatório</h1>
