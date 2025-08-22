@@ -5,8 +5,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { toast } from '@/components/ui/sonner'
-import { ClipboardCheck } from 'lucide-react'
+import { toast } from 'sonner'
+import { Shield } from 'lucide-react'
 
 export function LoginForm() {
   const [loading, setLoading] = useState(false)
@@ -17,7 +17,7 @@ export function LoginForm() {
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-
+    
     try {
       await signIn(email, password)
       toast.success('Login realizado com sucesso!')
@@ -31,10 +31,10 @@ export function LoginForm() {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-
+    
     try {
       await signUp(email, password, organizationName)
-      toast.success('Conta criada com sucesso! Verifique seu email.')
+      toast.success('Conta criada com sucesso!')
     } catch (error: any) {
       toast.error(error.message || 'Erro ao criar conta')
     } finally {
@@ -43,59 +43,53 @@ export function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-secondary/5 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl gradient-primary">
-              <ClipboardCheck className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold">Vistoria Check</h1>
-              <p className="text-sm text-muted-foreground">Vistorias Profissionais</p>
-            </div>
+          <div className="flex items-center justify-center space-x-2 mb-4">
+            <Shield className="h-8 w-8 text-primary" />
+            <span className="text-2xl font-bold">Vistoria Check</span>
           </div>
-          <p className="text-muted-foreground">
-            Checklist personalizável, fotos, assinaturas e PDF com verificação pública
-          </p>
+          <h1 className="text-2xl font-semibold">Bem-vindo</h1>
+          <p className="text-muted-foreground">Entre na sua conta ou crie uma nova</p>
         </div>
 
-        <Card className="shadow-medium">
-          <CardHeader className="text-center">
-            <CardTitle>Acesse sua conta</CardTitle>
+        <Card>
+          <CardHeader>
+            <CardTitle>Autenticação</CardTitle>
             <CardDescription>
-              Entre ou crie uma nova conta para começar
+              Entre na sua conta ou registre-se para começar
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="signin">Entrar</TabsTrigger>
-                <TabsTrigger value="signup">Criar Conta</TabsTrigger>
+                <TabsTrigger value="signup">Registrar</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="signin">
+              <TabsContent value="signin" className="space-y-4">
                 <form onSubmit={handleSignIn} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                  <div>
+                    <Label htmlFor="signin-email">Email</Label>
                     <Input
-                      id="email"
+                      id="signin-email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="seu@email.com"
                       required
+                      disabled={loading}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Senha</Label>
+                  <div>
+                    <Label htmlFor="signin-password">Senha</Label>
                     <Input
-                      id="password"
+                      id="signin-password"
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••"
                       required
+                      disabled={loading}
                     />
                   </div>
                   <Button type="submit" className="w-full" disabled={loading}>
@@ -104,44 +98,44 @@ export function LoginForm() {
                 </form>
               </TabsContent>
               
-              <TabsContent value="signup">
+              <TabsContent value="signup" className="space-y-4">
                 <form onSubmit={handleSignUp} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="org-name">Nome da Empresa</Label>
+                  <div>
+                    <Label htmlFor="organization">Nome da Organização</Label>
                     <Input
-                      id="org-name"
+                      id="organization"
                       type="text"
                       value={organizationName}
                       onChange={(e) => setOrganizationName(e.target.value)}
-                      placeholder="Minha Empresa Ltda"
                       required
+                      disabled={loading}
                     />
                   </div>
-                  <div className="space-y-2">
+                  <div>
                     <Label htmlFor="signup-email">Email</Label>
                     <Input
                       id="signup-email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="seu@email.com"
                       required
+                      disabled={loading}
                     />
                   </div>
-                  <div className="space-y-2">
+                  <div>
                     <Label htmlFor="signup-password">Senha</Label>
                     <Input
                       id="signup-password"
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••"
                       required
+                      disabled={loading}
                       minLength={6}
                     />
                   </div>
                   <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? 'Criando conta...' : 'Criar Conta'}
+                    {loading ? 'Criando conta...' : 'Criar conta'}
                   </Button>
                 </form>
               </TabsContent>
@@ -149,9 +143,8 @@ export function LoginForm() {
           </CardContent>
         </Card>
 
-        <div className="text-center mt-6 text-sm text-muted-foreground">
-          <p>Plano Pay-per-Use: 3 PDFs gratuitos</p>
-          <p>Depois R$ 19 por vistoria adicional</p>
+        <div className="text-center mt-8 text-sm text-muted-foreground">
+          <p>Teste gratuito por 30 dias • Sem cartão de crédito</p>
         </div>
       </div>
     </div>
