@@ -1,7 +1,9 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Landing from '@/pages/Landing'
 import Pricing from '@/pages/Pricing'
 import Dashboard from '@/pages/Dashboard'
+import Auth from '@/pages/Auth'
+import ResetPassword from '@/pages/ResetPassword'
 import PublicVerify from '@/pages/PublicVerify'
 import NotFound from '@/pages/NotFound'
 
@@ -11,6 +13,8 @@ export default function AppRoutes(){
       <Routes>
         <Route path="/" element={<Landing/>}/>
         <Route path="/pricing" element={<Pricing/>}/>
+        <Route path="/auth" element={<Auth/>}/>
+        <Route path="/reset" element={<ResetPassword/>}/>
         <Route path="/app" element={<Dashboard/>}/>
         <Route path="/p/:token" element={<PublicVerify/>}/>
         <Route path="*" element={<NotFound/>}/>

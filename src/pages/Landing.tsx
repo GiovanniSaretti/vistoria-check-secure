@@ -57,7 +57,7 @@ export default function Landing() {
               <Link to="/pricing" className="text-muted-foreground hover:text-foreground">
                 Planos
               </Link>
-              <Link to="/app">
+              <Link to="/auth">
                 <Button>Entrar</Button>
               </Link>
             </div>
@@ -80,7 +80,7 @@ export default function Landing() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link to="/app">
+            <Link to="/auth">
               <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary-hover shadow-primary hover:shadow-strong transition-all">
                 <Zap className="mr-2 h-5 w-5" />
                 Começar Grátis

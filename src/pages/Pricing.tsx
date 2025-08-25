@@ -164,7 +164,7 @@ const Pricing = () => {
               <Link to="/inspection-demo" className="text-muted-foreground hover:text-foreground">
                 Demo
               </Link>
-              <Link to="/app">
+              <Link to="/auth">
                 <Button>Entrar</Button>
               </Link>
             </div>
@@ -263,7 +263,7 @@ const Pricing = () => {
                     ))}
                   </ul>
                   
-                  <Link to="/app">
+                  <Link to="/auth">
                     <Button 
                       className="w-full" 
                       variant={plan.highlight ? "default" : "outline"}
@@ -298,10 +298,10 @@ const Pricing = () => {
               Entre em contato conosco para uma demonstração personalizada
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
+              <Link to="/auth">
                 <Button>Falar com Vendas</Button>
               </Link>
-              <Link to="/inspection-demo">
+              <Link to="/pricing">
                 <Button variant="outline">Ver Demonstração</Button>
               </Link>
             </div>
@@ -344,12 +344,12 @@ const Pricing = () => {
             Experimente gratuitamente por 30 dias. Sem compromisso.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/app">
+            <Link to="/auth">
               <Button size="lg" variant="secondary">
                 Começar Teste Grátis
               </Button>
             </Link>
-            <Link to="/contact">
+            <Link to="/auth">
               <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
                 Falar com Especialista
               </Button>
