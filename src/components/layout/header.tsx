@@ -9,8 +9,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useAuth } from "@/hooks/useAuth"
 
 export function Header() {
+  const { user, signOut } = useAuth()
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-6">
@@ -45,17 +48,17 @@ export function Header() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-9 w-9 rounded-full">
                 <Avatar className="h-9 w-9">
-                  <AvatarImage src="/placeholder.svg" alt="Avatar" />
-                  <AvatarFallback>JD</AvatarFallback>
+                  <AvatarImage src={user?.profile?.avatar_url} alt="Avatar" />
+                  <AvatarFallback>{user?.profile?.name?.[0] || user?.email?.[0] || 'U'}</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <div className="flex items-center justify-start gap-2 p-2">
                 <div className="flex flex-col space-y-1 leading-none">
-                  <p className="font-medium">João Silva</p>
+                  <p className="font-medium">{user?.profile?.name || user?.email?.split('@')[0]}</p>
                   <p className="w-[200px] truncate text-sm text-muted-foreground">
-                    admin@empresa.com
+                    {user?.email}
                   </p>
                 </div>
               </div>
@@ -69,7 +72,7 @@ export function Header() {
                 <span>Configurações</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive">
+              <DropdownMenuItem className="text-destructive" onClick={signOut}>
                 Sair
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -79,3 +82,5 @@ export function Header() {
     </header>
   )
 }
+
+

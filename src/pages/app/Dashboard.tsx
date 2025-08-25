@@ -2,10 +2,10 @@ import { useAuth } from '@/hooks/useAuth'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { 
-  ClipboardCheck, 
-  FileText, 
-  Users, 
+import {
+  ClipboardCheck,
+  FileText,
+  Users,
   AlertTriangle,
   Plus,
   TrendingUp,
@@ -13,35 +13,39 @@ import {
   CheckCircle
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useInspections } from '@/hooks/useInspections'
+import { useTemplates } from '@/hooks/useTemplates'
 
 export default function Dashboard() {
   const { user, organization } = useAuth()
+  const { inspections } = useInspections()
+  const { templates } = useTemplates()
 
   const stats = [
     {
       title: "Vistorias Realizadas",
-      value: "0",
+      value: inspections?.length || 0,
       description: "Neste mês",
       icon: ClipboardCheck,
       trend: "+0%"
     },
     {
       title: "Aguardando Assinatura",
-      value: "0",
+      value: inspections?.filter(i => i.status === 'pending_signature').length || 0,
       description: "Pendentes",
       icon: Clock,
       trend: "0"
     },
     {
       title: "Com Pendências",
-      value: "0",
+      value: inspections?.filter(i => i.status === 'needs_attention').length || 0,
       description: "Requer atenção",
       icon: AlertTriangle,
       trend: "0"
     },
     {
       title: "Templates Ativos",
-      value: "0",
+      value: templates?.length || 0,
       description: "Disponíveis",
       icon: FileText,
       trend: "0"
@@ -207,3 +211,5 @@ export default function Dashboard() {
     </div>
   )
 }
+
+
