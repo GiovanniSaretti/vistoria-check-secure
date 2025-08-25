@@ -153,7 +153,9 @@ const Pricing = () => {
             <Link to="/" className="flex items-center space-x-2">
               <ArrowLeft className="h-5 w-5" />
               <Shield className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold">Vistoria Check</span>
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Vistor IA
+              </span>
             </Link>
             <div className="flex items-center space-x-4">
               <Link to="/" className="text-muted-foreground hover:text-foreground">
@@ -361,10 +363,12 @@ const Pricing = () => {
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Shield className="h-6 w-6 text-primary" />
-            <span className="text-lg font-bold">Vistoria Check</span>
+            <span className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Vistor IA
+            </span>
           </div>
           <p className="text-sm text-muted-foreground">
-            &copy; 2024 Vistoria Check Secure. Todos os direitos reservados.
+            &copy; 2024 Vistor IA. Todos os direitos reservados.
           </p>
         </div>
       </footer>
